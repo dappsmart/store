@@ -16,12 +16,12 @@ class Customer(models.Model):
     
 class Product(models.Model):
     name = models.CharField(default=00000, max_length=200, blank=False)
-    #price = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
+    #price = models.DecimalField(default=0, on_delete=SET_NULL, max_digits=10, decimal_places=2, blank=False, null=True)
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(default=False, blank=True)
     
     def __str__(self):
-        return self.name + ": $" + str(self.price)
+         return self.name #+ : $" + str(self.price)
     
     @property
     def imageURL(self):
@@ -54,15 +54,15 @@ class Order(models.Model):
         return total      
     
     
-class OrderItem(models.Model):   
-    product = models.ForeignKey(Product, on_delete=SET_NULL, null=True, blank=False)
-    order = models.ForeignKey(Order, on_delete=SET_NULL, null=True, blank=True)
-    quantity = models.IntegerField(default=0, null=True, blank=True)
-    date_added = models.DateTimeField(auto_now_add=True)
+# class OrderItem(models.Model):   
+#     product = models.ForeignKey(Product, on_delete=SET_NULL, null=True, blank=False)
+#     order = models.ForeignKey(Order, on_delete=SET_NULL, null=True, blank=True)
+#     quantity = models.IntegerField(default=0, null=True, blank=True)
+#     date_added = models.DateTimeField(auto_now_add=True)
     
-    def get_total(self):
-        total = self.product.price * self.quantity        
-        return total
+#     def get_total(self):
+#         total = str(self.product.price * self.quantity)        
+#         return total
     
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=SET_NULL, null=True)
