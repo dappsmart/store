@@ -16,12 +16,12 @@ class Customer(models.Model):
     
 class Product(models.Model):
     name = models.CharField(default=00000, max_length=200, blank=False)
-    price = models.FloatField(on_delete=SET_NULL, blank=False, null=True) 
+    #price = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=True)
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(default=False, blank=True)
     
     def __str__(self):
-        return self.name
+        return self.name + ": $" + str(self.price)
     
     @property
     def imageURL(self):
